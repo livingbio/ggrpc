@@ -6,7 +6,10 @@ import requests
 
 
 def is_defined_method(cls):
-    return inspect.getmembers(cls, predicate=lambda m: inspect.ismethod(m) and m.__func__ in m.im_class.__dict__.values())
+    return inspect.getmembers(
+        cls,
+        predicate=lambda m: inspect.ismethod(m) and m.__func__ in m.im_class.__dict__.values()
+    )
 
 
 def list_public_method(cls):
