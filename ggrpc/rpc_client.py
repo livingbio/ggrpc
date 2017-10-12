@@ -20,7 +20,7 @@ def list_public_method(cls):
 
 
 template = """
-from ggrpc import RPCClient
+from ggrpc.rpc_client import RPCClient
 
 class {{cls_name}}(RPCClient):
     {% for method, arg in methods %}
@@ -43,7 +43,10 @@ def client_factory(kls):
         if argspec.defaults:
             for k in range(len(argspec.defaults)):
                 idx = -1 - k
-                assert isinstance(argspec.defaults[idx], (basestring, int, float))
+                assert isinstance(
+                    argspec.defaults[idx],
+                    (basestring, int, float)
+                )
 
                 if isinstance(argspec.defaults[idx], basestring):
                     args[idx] = "%s='%s'" % (args[idx], argspec.defaults[idx])
@@ -58,7 +61,10 @@ def client_factory(kls):
 
         methods.append((name, ", ".join(args)))
 
-    return jinja2.Template(template).render(cls_name=kls.__name__, methods=methods)
+    return jinja2.Template(template).render(
+        cls_name=kls.__name__,
+        methods=methods
+    )
 
 
 class RPCClient(object):

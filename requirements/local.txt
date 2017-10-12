@@ -1,0 +1,6 @@
+pytest
+pytest-cov
+mock
+pytest-django
+pytest-mock
+flake8
