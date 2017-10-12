@@ -27,11 +27,8 @@ def _fake_call(name, *args, **kwargs):
 def test_create_service(mock_func):
     code = client_factory(FakeService)
 
-    with open('_client.py', 'w') as ofile:
-        ofile.write(code)
-
-    _client = __import__('_client')
-    service = _client.FakeService("url")
+    exec(code)
+    service = FakeService("url")
 
     assert service.add(1, 2) == 3
     assert service.my_sum(1, 2, 3) == 6
