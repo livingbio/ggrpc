@@ -12,8 +12,7 @@ install:
 
 script:
 - flake8 ./ggrpc
-- cd example_project
-- py.test . --cov=../ggrpc
+- py.test ./example_project --cov=./ggrpc
 
 after_success:
   - coveralls
