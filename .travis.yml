@@ -1,0 +1,19 @@
+sudo: false
+language: python
+cache: pip
+
+before_install:
+- pip install --upgrade pip setuptools wheel
+- pip install python-coveralls
+
+install:
+- pip install -r ./requirements.txt
+- pip install -r ./requirements/local.txt
+
+script:
+- flake8 ./ggrpc
+- cd example_project
+- py.test . --cov=../ggrpc
+
+after_success:
+  - coveralls
