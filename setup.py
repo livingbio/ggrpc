@@ -53,5 +53,6 @@ with io.open('README.md') as readme:
         install_requires=INSTALL_REQUIRES,
         packages=find_packages(),
         zip_safe=False,
-        py_modules=['gg_client_sdk']
+        py_modules=['gg_client_sdk'],
+        entry_points={'console_scripts': ['gg_client_sdk = gg_client_sdk:main']},
     )

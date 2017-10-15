@@ -18,7 +18,16 @@ def import_class(import_str):
                            traceback.format_exception(*sys.exc_info())))
 
 
-def generate(kls_path, opath=None):
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+
+    kls_path = argv[1]
+    if len(argv) > 2:
+        opath = argv[2]
+    else:
+        opath = None
+
     kls = import_class(kls_path)
     code = client_factory(kls)
 
@@ -27,5 +36,5 @@ def generate(kls_path, opath=None):
         ofile.write(code)
 
 
-if __name__ == "__main__":
-    import clime; clime.start(debug=True)
+if __name__ == '__main__':
+    sys.exit(main())
