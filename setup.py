@@ -22,7 +22,7 @@ INSTALL_REQUIRES = (
 
 
 def version():
-    return "0.2"
+    return "0.3"
 
 
 with io.open('README.md') as readme:
@@ -53,4 +53,5 @@ with io.open('README.md') as readme:
         install_requires=INSTALL_REQUIRES,
         packages=find_packages(),
         zip_safe=False,
+        py_modules=['gg_client_sdk']
     )

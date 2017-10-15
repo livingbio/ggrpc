@@ -26,6 +26,7 @@ template = """
 from ggrpc.rpc_client import RPCClient
 
 class {{cls_name}}(RPCClient):
+    "Auto Generate SDK"
     {% for method, arg in methods %}
     {% if arg %}
     def {{method}}(self, {{arg}}):
