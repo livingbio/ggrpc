@@ -1,7 +1,8 @@
+import os
 import sys
 import traceback
 
-from ggrpc.rpc_client import client_factory
+from ggrpc.utils import client_factory
 
 
 def import_class(import_str):
@@ -19,6 +20,8 @@ def import_class(import_str):
 
 
 def main(argv=None):
+    sys.path.append(os.path.realpath('.'))
+
     if argv is None:
         argv = sys.argv
 

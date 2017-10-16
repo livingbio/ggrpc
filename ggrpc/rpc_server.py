@@ -1,16 +1,22 @@
-import json
 
 from django.http import HttpResponse
 from django.views import View
 
+from .utils import get_coder
+
 
 class RPCView(View):
-    # TODO: for django only, can support other framework in the future
+    # TODO: Support other framework
+    # TODO: add async / batch mode
+
     def post(self, request, method):
-        # TODO: add async / batch mode
         # A simple RPC implementation, may switch to gRPC in the future
         method = getattr(self, method)
-        params = json.loads(request.POST.get('params'))
+
+        format = request.POST.get('format', 'json')
+        coder = get_coder(format)
+
+        params = coder.loads(request.POST.get('params'))
         result = method(*params['args'], **params['kwargs'])
 
-        return HttpResponse(json.dumps(result))
+        return HttpResponse(coder.dumps(result))

@@ -4,7 +4,7 @@ import mock
 from django.test import Client
 from django.urls import reverse
 
-from ggrpc.rpc_client import client_factory
+from ggrpc.utils import client_factory
 from ..views import FakeService
 
 
@@ -28,7 +28,7 @@ def test_create_service(mock_func):
     code = client_factory(FakeService)
 
     exec(code)
-    service = FakeService("url")
+    service = FakeService("http://a.fake.url/")
 
     assert service.add(1, 2) == 3
     assert service.my_sum(1, 2, 3) == 6
